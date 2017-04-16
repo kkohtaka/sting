@@ -1,0 +1,26 @@
+{
+  "variables": {
+    "PROJECT_ID": ""
+  },
+  "builders": [
+    {
+      "type": "googlecompute",
+      "account_file": "credentials.json",
+      "source_image": "coreos-stable-1298-7-0-v20170401",
+      "project_id": "{{user `PROJECT_ID`}}",
+      "image_family": "coreos",
+      "image_name": "coreos",
+      "zone": "asia-northeast1-a",
+      "ssh_username": "core"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "ansible",
+      "playbook_file": "./playbook.yml",
+      "extra_arguments": [
+        "--extra-vars", "ansible_python_interpreter=/home/core/bin/python"
+      ]
+    }
+  ]
+}
